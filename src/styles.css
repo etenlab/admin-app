@@ -1,0 +1,17 @@
+.login-page ion-grid {
+    height: 100%;
+}
+
+.login-page ion-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.error {
+    font-size: 12px;
+    color: red;
+    display: block;
+    width: 100%;
+}

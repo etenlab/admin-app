@@ -3,12 +3,28 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
+
+var client = new ApolloClient({
+  uri: 'http://localhost:8081/v1/graphql',
+  cache: new InMemoryCache(),
+});
+console.log(process.env.NODE_ENV);
+if(process.env.NODE_ENV === "production"){
+  client = new ApolloClient({
+    uri: 'https://fast-heron-34.hasura.app/v1/graphql',
+    cache: new InMemoryCache(),
+  });
+}
+
 root.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>
 );
 
