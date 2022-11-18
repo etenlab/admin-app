@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { IonCol, IonContent, IonGrid, IonHeader, IonButtons, IonBackButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import React from 'react';
+import { IonCol, IonContent, IonGrid, IonPage, IonRow } from '@ionic/react';
 import Header from '../common/Header';
 
 const Applications: React.FC = () => {

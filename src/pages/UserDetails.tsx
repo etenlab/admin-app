@@ -17,10 +17,8 @@ const UserDetails: React.FC = () => {
     const [ userData, setUserData ] = useState<any>()
 
     useEffect( () => {
-
         const keycloakUrl = `${process.env.REACT_APP_KEYCLOAK_URL}`;
         let authToken = localStorage.getItem("authToken");
-
         const fetchData = async () => {
             await axios.get(`${keycloakUrl}/admin/realms/master/users/${userid}`, {
                 headers: { 
@@ -36,7 +34,6 @@ const UserDetails: React.FC = () => {
         fetchData().catch(console.error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userid]);
-
 
     console.log(userData)
 

@@ -1,4 +1,4 @@
-import { IonCol, IonContent, IonGrid, IonHeader, IonItem, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCol, IonContent, IonGrid, IonItem, IonPage, IonRow } from '@ionic/react';
 // import ExploreContainer from '../components/ExploreContainer';
 // import './Home.css';
 import Header from '../common/Header';
