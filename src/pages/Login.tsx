@@ -5,15 +5,11 @@ import axios from "axios"
 import { 
     IonPage, 
     IonContent, 
-    IonHeader,
-    IonToolbar, 
-    IonTitle,
     IonGrid,
     IonRow,
     IonCol,
     IonButton,
     IonItem,
-    IonLabel,
     IonInput
     
 } from "@ionic/react";
@@ -45,8 +41,8 @@ const Login: React.FC = () => {
         // console.log(username)
         // console.log(password)
         // var querystring = require('querystring');
-        const keycloakUrl = "http://localhost:8080/realms/master/protocol/openid-connect";
-        // const keycloakUrl = `${process.env.REACT_APP_KEYCLOAK_URL}/realms/${process.env.REACT_APP_KEYCLOAK_REALM}/protocol/openid-connect`;
+        // const keycloakUrl1 = "http://localhost:8080/realms/master/protocol/openid-connect";
+        const keycloakUrl = `${process.env.REACT_APP_KEYCLOAK_URL}/realms/master/protocol/openid-connect`;
 
         await axios.post(`${keycloakUrl}/token`, querystring.stringify({
             client_id: 'admin-app', // process.env.REACT_APP_KEYCLOAK_CLIENT_ID,
@@ -93,29 +89,45 @@ const Login: React.FC = () => {
 
     return (
         <IonPage className="login-page">
-            <IonHeader>
+            {/* <IonHeader>
                 <IonToolbar>
                     <IonTitle>Login</IonTitle>
                 </IonToolbar>
-            </IonHeader>
+            </IonHeader> */}
             <IonContent  class="auth-form" fullscreen>
                 <IonGrid>
+                    <IonRow>
+                        <IonCol>
+                        <h2>Log in</h2>
+                        </IonCol>
+                    </IonRow>
                     <IonRow>
                         <IonCol>
                             {loginMessage!=="" && (
                                 <IonItem lines="none"><span className="error">{loginMessage}</span></IonItem>
                             )}
-                            <IonItem lines="none">
-                                <IonLabel position="floating">Email</IonLabel>
-                                <IonInput onIonInput={(e: any) => setUsername(e.target.value)} type="email" required></IonInput>
-                            </IonItem>
-                            <IonItem lines="none">
-                                <IonLabel position="floating">Password</IonLabel>
-                                <IonInput onIonInput={(e: any) => setPassword(e.target.value)} type="password" required></IonInput>
-                            </IonItem>
-                            <IonItem lines="none">
-                                <IonButton onClick={handleLogin} expand="block" color="primary">Login</IonButton>
-                            </IonItem>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                            {/* <IonLabel position="floating">Email</IonLabel> */}
+                            <IonInput onIonInput={(e: any) => setUsername(e.target.value)} type="email" class="input-text" required></IonInput>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                            {/* <IonLabel position="floating">Password</IonLabel> */}
+                            <IonInput onIonInput={(e: any) => setPassword(e.target.value)} type="password" class="input-text" required></IonInput>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                        <IonButton onClick={handleLogin} expand="block" color="dark" size="default">Login</IonButton>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                        <h3 className="text-center">Don't have an account?</h3>
                         </IonCol>
                     </IonRow>
                 </IonGrid>

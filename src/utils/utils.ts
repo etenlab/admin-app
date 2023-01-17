@@ -1,4 +1,7 @@
-
+export interface ParamTypes {
+    userid?: string,
+    id?: string,
+}
 
 export function decodeToken(str: string) {
     str = str.split('.')[1];

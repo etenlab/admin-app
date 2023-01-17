@@ -9,7 +9,7 @@ const container = document.getElementById('root');
 const root = createRoot(container!);
 
 var client = new ApolloClient({
-  uri: 'http://localhost:8081/v1/graphql',
+  uri: 'http://localhost:8011/graphql',
   cache: new InMemoryCache(),
 });
 console.log(process.env.NODE_ENV);

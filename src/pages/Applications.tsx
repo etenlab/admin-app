@@ -1,11 +1,24 @@
 import React from 'react';
-import { IonCol, IonContent, IonGrid, IonPage, IonRow } from '@ionic/react';
+import { IonCol, IonContent, IonGrid, IonPage, IonRow, IonItem } from '@ionic/react';
 import Header from '../common/Header';
+import { gql, useQuery } from '@apollo/client';
+
+const GET_APPLOICATIONS = gql`
+    query GetApps {
+        applications {
+            app_name
+            id
+        }
+    }
+`;
 
 const Applications: React.FC = () => {
 
+    const { loading, error, data } = useQuery(GET_APPLOICATIONS);
+    if (loading) return null;
+
     return (
-        <IonPage>
+        <IonPage id="main-content">
             <Header title="Applications" />
             <IonContent fullscreen>
                 {/* <IonHeader collapse="condense">
@@ -17,10 +30,17 @@ const Applications: React.FC = () => {
                 <IonGrid>
                     <IonRow>
                         <IonCol>
-                            <h1>Applications Page</h1>
-                        {/* <IonItem href='/login'>Users</IonItem>
-                        <IonItem href='/login'>Organizations</IonItem>
-                        <IonItem href='/login'>Applications</IonItem> */}
+                            {loading && (
+                                <IonItem>Loading..</IonItem>
+                            )}
+                            {error && (
+                                <IonItem>{error.message}</IonItem>
+                            )}
+                            {data.applications.map((item: any) => {
+                                return (
+                                    <IonItem >{item.app_name}</IonItem>
+                                )
+                            })}
                         </IonCol>
                     </IonRow>
                 </IonGrid>

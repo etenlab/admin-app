@@ -5,7 +5,7 @@ import { gql, useQuery } from '@apollo/client';
 
 const GET_ORGANIZATIONS = gql`
     query GetOrgs {
-        admin_organizations {
+        organizations {
             id
             name
         }
@@ -26,7 +26,7 @@ const Organizations: React.FC = () => {
 
 
     return (
-        <IonPage>
+        <IonPage id="main-content">
             <Header title="Organizations" />
             <IonContent fullscreen>
                 <IonGrid>
