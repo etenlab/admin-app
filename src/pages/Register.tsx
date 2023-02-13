@@ -15,10 +15,10 @@ import {
 
 const Register: React.FC = () => {
 
-    const [loginMessage, setLoginMessage] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [loginMessage] = useState("");
+    const [, setUsername] = useState("");
+    const [, setPassword] = useState("");
+    const [, setConfirmPassword] = useState("");
 
     const handleLogin = () =>{
 

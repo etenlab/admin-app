@@ -1,4 +1,4 @@
-import { IonHeader, IonButtons, IonMenuButton, IonTitle, IonToolbar, IonButton } from '@ionic/react';
+import { IonHeader, IonButtons, IonMenuButton, IonTitle, IonToolbar } from '@ionic/react';
 import Menu  from './Menu'
 
 interface Props {
