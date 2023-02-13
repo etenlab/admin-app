@@ -1,0 +1,53 @@
+name: Upload Website to S3
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: npm ci --force
+        run: npm ci --force
+
+      - name: npm run build
+        run: npm run build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_GITHUB_S3_PUSHER_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_GITHUB_S3_PUSHER_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - uses: dkershner6/aws-ssm-getparameters-action@v1
+        with:
+          parameterPairs: '
+            /dev/deploy/admin-app/access-key = AWS_ACCESS_KEY_ID,
+            /dev/deploy/admin-app/secret-access-key = AWS_SECRET_ACCESS_KEY,
+            /dev/deploy/admin-app/s3-bucket-name = AWS_S3_BUCKET,
+            /dev/deploy/admin-app/cloudfront-distribution-id = DISTRIBUTION_ID,
+            /dev/deploy/admin-app/react-app-hasura-url = REACT_APP_HASURA_URL,
+            /dev/deploy/admin-app/react-app-keycloak-url = REACT_APP_KEYCLOAK_URL,
+            /dev/deploy/admin-app/react-app-keycloak-realm = REACT_APP_KEYCLOAK_REALM,
+            /dev/deploy/admin-app/react-app-keycloak-client-id = REACT_APP_KEYCLOAK_CLIENT_ID'
+          withDecryption: 'true' # defaults to true
+
+      - name: Build
+        run: ionic build
+
+      - uses: TimekillerTK/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
+        env:
+          AWS_REGION: us-east-2
+          SOURCE_DIR: 'build'
