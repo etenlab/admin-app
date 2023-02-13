@@ -9,16 +9,10 @@ const container = document.getElementById('root');
 const root = createRoot(container!);
 
 var client = new ApolloClient({
-  uri: 'http://localhost:8011/graphql',
+  uri: process.env.HASURA_URL,
   cache: new InMemoryCache(),
 });
 console.log(process.env.NODE_ENV);
-if(process.env.NODE_ENV === "production"){
-  client = new ApolloClient({
-    uri: 'https://fast-heron-34.hasura.app/v1/graphql',
-    cache: new InMemoryCache(),
-  });
-}
 
 root.render(
   <React.StrictMode>
