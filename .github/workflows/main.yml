@@ -42,9 +42,6 @@ jobs:
             /dev/deploy/admin-app/react-app-keycloak-client-id = REACT_APP_KEYCLOAK_CLIENT_ID'
           withDecryption: 'true' # defaults to true
 
-      - name: Build
-        run: ionic build
-
       - uses: TimekillerTK/s3-sync-action@master
         with:
           args: --follow-symlinks --delete
