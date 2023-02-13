@@ -5,14 +5,10 @@ import { HttpLink } from 'apollo-link-http';
 // Instantiate required constructor fields
 const cache = new InMemoryCache();
 var link = new HttpLink({
-  uri: 'http://localhost:8081/v1/graphql',
+  uri: process.env.HASURA_URL,
 });
 
-if(process.env.NODE_ENV === "production"){
-  link = new HttpLink({
-    uri: 'https://fast-heron-34.hasura.app/v1/graphql',
-  });
-}
+
 
 export const client = new ApolloClient({
   // Provide required constructor fields
