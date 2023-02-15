@@ -16,12 +16,6 @@ jobs:
         with:
           node-version: 16
 
-      - name: npm ci --force
-        run: npm ci --force
-
-      - name: npm run build
-        run: npm run build
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -31,28 +25,22 @@ jobs:
 
       - uses: dkershner6/aws-ssm-getparameters-action@v1
         with:
-          parameterPairs: '/dev/deploy/admin-app/env = ALL_ENVS'
-          withDecryption: 'true' # defaults to true
+          parameterPairs: '/dev/deploy/admin-app/env = ENV'
       
-      # - run: cat > .env <<- EOM ${{ env.ALL_ENVS }} \nEOM
-      - run: |
+      - name: save env to .env
+        run: |
           cat << EOF > .env
-          ${{ env.ALL_ENVS }}
+          ${{ env.ENV }}
           EOF
-      - run: cat .env
+
+      - name: npm ci --force
+        run: npm ci --force
+
+      - name: npm run build
+        run: npm run build
 
       - name: Load .env file
         uses: xom9ikk/dotenv@v2
-
-      - name: Some other action
-        run: |
-          echo "Variable ABC: ${{ env.ABC }}"
-          echo "Variable 2DEF: ${{ env.DEF }}"
-          echo "Variable MULTI: ${{ env.MULTI }}"
-
-      - run: cat .env
-
-      - run: echo $DISTRIBUTION_ID
 
       - uses: TimekillerTK/s3-sync-action@master
         with:
@@ -60,13 +48,3 @@ jobs:
         env:
           AWS_REGION: us-east-2
           SOURCE_DIR: 'build'
-
-
-    #  /dev/deploy/admin-app/access-key = AWS_ACCESS_KEY_ID,
-    #         /dev/deploy/admin-app/secret-access-key = AWS_SECRET_ACCESS_KEY,
-    #         /dev/deploy/admin-app/s3-bucket-name = AWS_S3_BUCKET,
-    #         /dev/deploy/admin-app/cloudfront-distribution-id = DISTRIBUTION_ID,
-    #         /dev/deploy/admin-app/react-app-hasura-url = REACT_APP_HASURA_URL,
-    #         /dev/deploy/admin-app/react-app-keycloak-url = REACT_APP_KEYCLOAK_URL,
-    #         /dev/deploy/admin-app/react-app-keycloak-realm = REACT_APP_KEYCLOAK_REALM,
-    #         /dev/deploy/admin-app/react-app-keycloak-client-id = REACT_APP_KEYCLOAK_CLIENT_ID,
