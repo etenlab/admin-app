@@ -34,7 +34,11 @@ jobs:
           parameterPairs: '/dev/deploy/admin-app/env = ALL_ENVS'
           withDecryption: 'true' # defaults to true
       
-      - run: echo ${{ env.ALL_ENVS }} > .env
+      # - run: cat > .env <<- EOM ${{ env.ALL_ENVS }} \nEOM
+      - run: >
+          cat << EOF > .env \
+          ${{ env.ALL_ENVS }} \
+          EOF
       - run: cat .env
 
       - name: Load .env file
