@@ -36,6 +36,15 @@ jobs:
       
       - run: echo $ALL_ENVS > .env
 
+      - name: Load .env file
+        uses: xom9ikk/dotenv@v2
+
+      - name: Some other action
+        run: |
+          echo "Variable ABC: ${{ env.ABC }}"
+          echo "Variable 2DEF: ${{ env.DEF }}"
+          echo "Variable MULTI: ${{ env.MULTI }}"
+
       - run: cat .env
 
       - run: echo $DISTRIBUTION_ID
