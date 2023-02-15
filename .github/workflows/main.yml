@@ -35,7 +35,7 @@ jobs:
           withDecryption: 'true' # defaults to true
       
       # - run: cat > .env <<- EOM ${{ env.ALL_ENVS }} \nEOM
-      - run: >
+      - run: |
           cat << EOF > .env \
           ${{ env.ALL_ENVS }} \
           EOF
