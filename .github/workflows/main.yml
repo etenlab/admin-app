@@ -34,7 +34,8 @@ jobs:
           parameterPairs: '/dev/deploy/admin-app/env = ALL_ENVS'
           withDecryption: 'true' # defaults to true
       
-      - run: echo $ALL_ENVS > .env
+      - run: echo ${{ env.ALL_ENVS }} > .env
+      - run: cat .env
 
       - name: Load .env file
         uses: xom9ikk/dotenv@v2
