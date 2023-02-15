@@ -45,9 +45,7 @@ jobs:
       
       - run: echo $ALL_ENVS > .env
 
-      - run: echo .env
-
-      - run: source ./.env
+      - run: cat .env
 
       - run: echo $DISTRIBUTION_ID
 
