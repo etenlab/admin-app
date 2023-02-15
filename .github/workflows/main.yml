@@ -39,8 +39,17 @@ jobs:
             /dev/deploy/admin-app/react-app-hasura-url = REACT_APP_HASURA_URL,
             /dev/deploy/admin-app/react-app-keycloak-url = REACT_APP_KEYCLOAK_URL,
             /dev/deploy/admin-app/react-app-keycloak-realm = REACT_APP_KEYCLOAK_REALM,
-            /dev/deploy/admin-app/react-app-keycloak-client-id = REACT_APP_KEYCLOAK_CLIENT_ID'
+            /dev/deploy/admin-app/react-app-keycloak-client-id = REACT_APP_KEYCLOAK_CLIENT_ID,
+            /dev/deploy/admin-app/env = ALL_ENVS'
           withDecryption: 'true' # defaults to true
+      
+      - run: echo $ALL_ENVS > .env
+
+      - run: echo .env
+
+      - run: . .env
+
+      - run: echo $DISTRIBUTION_ID
 
       - uses: TimekillerTK/s3-sync-action@master
         with:
