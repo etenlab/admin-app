@@ -47,7 +47,7 @@ jobs:
 
       - run: echo .env
 
-      - run: . .env
+      - run: source ./.env
 
       - run: echo $DISTRIBUTION_ID
 
