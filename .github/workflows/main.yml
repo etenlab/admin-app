@@ -36,9 +36,9 @@ jobs:
       
       # - run: cat > .env <<- EOM ${{ env.ALL_ENVS }} \nEOM
       - run: |
-          cat << EOF > .env \
-          ${{ env.ALL_ENVS }} \
-          EOF \
+          cat << EOF > .env
+          ${{ env.ALL_ENVS }}
+          EOF
       - run: cat .env
 
       - name: Load .env file
