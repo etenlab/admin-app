@@ -31,16 +31,7 @@ jobs:
 
       - uses: dkershner6/aws-ssm-getparameters-action@v1
         with:
-          parameterPairs: '
-            /dev/deploy/admin-app/access-key = AWS_ACCESS_KEY_ID,
-            /dev/deploy/admin-app/secret-access-key = AWS_SECRET_ACCESS_KEY,
-            /dev/deploy/admin-app/s3-bucket-name = AWS_S3_BUCKET,
-            /dev/deploy/admin-app/cloudfront-distribution-id = DISTRIBUTION_ID,
-            /dev/deploy/admin-app/react-app-hasura-url = REACT_APP_HASURA_URL,
-            /dev/deploy/admin-app/react-app-keycloak-url = REACT_APP_KEYCLOAK_URL,
-            /dev/deploy/admin-app/react-app-keycloak-realm = REACT_APP_KEYCLOAK_REALM,
-            /dev/deploy/admin-app/react-app-keycloak-client-id = REACT_APP_KEYCLOAK_CLIENT_ID,
-            /dev/deploy/admin-app/env = ALL_ENVS'
+          parameterPairs: '/dev/deploy/admin-app/env = ALL_ENVS'
           withDecryption: 'true' # defaults to true
       
       - run: echo $ALL_ENVS > .env
@@ -55,3 +46,13 @@ jobs:
         env:
           AWS_REGION: us-east-2
           SOURCE_DIR: 'build'
+
+
+    #  /dev/deploy/admin-app/access-key = AWS_ACCESS_KEY_ID,
+    #         /dev/deploy/admin-app/secret-access-key = AWS_SECRET_ACCESS_KEY,
+    #         /dev/deploy/admin-app/s3-bucket-name = AWS_S3_BUCKET,
+    #         /dev/deploy/admin-app/cloudfront-distribution-id = DISTRIBUTION_ID,
+    #         /dev/deploy/admin-app/react-app-hasura-url = REACT_APP_HASURA_URL,
+    #         /dev/deploy/admin-app/react-app-keycloak-url = REACT_APP_KEYCLOAK_URL,
+    #         /dev/deploy/admin-app/react-app-keycloak-realm = REACT_APP_KEYCLOAK_REALM,
+    #         /dev/deploy/admin-app/react-app-keycloak-client-id = REACT_APP_KEYCLOAK_CLIENT_ID,
